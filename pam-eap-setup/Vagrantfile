@@ -26,8 +26,8 @@ config.vm.box = "centos/7"
       yum -y install maven
       yum -y install git
       yum -y install java-1.8.0-openjdk-devel
-      chown vagrant:vagrant /vagrant * -R
       cd /vagrant && ./pam-setup.sh -n localhost:8080 -b both
+      chown -R vagrant:vagrant /vagrant
       sh /vagrant/go_pam.sh
 
     SHELL
