@@ -3,7 +3,7 @@
 -- Host: localhost    Database: RHPAM
 -- ------------------------------------------------------
 -- Server version	8.0.20
-
+use COMGAS;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -20,8 +20,7 @@
 --
 
 DROP TABLE IF EXISTS `REDE_DE_TRANSMISSAO`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `REDE_DE_TRANSMISSAO` (
   `ID_TUBO` int DEFAULT NULL,
   `DATA_INSTALACAO` datetime DEFAULT NULL,
@@ -34,8 +33,8 @@ CREATE TABLE `REDE_DE_TRANSMISSAO` (
   `DIAMETRO` int DEFAULT NULL,
   `UNIDADE_DIAMETRO` text,
   `MATERIAL` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ;
+
 
 --
 -- Dumping data for table `REDE_DE_TRANSMISSAO`
