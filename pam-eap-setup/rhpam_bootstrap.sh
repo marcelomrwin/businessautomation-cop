@@ -6,4 +6,4 @@ yum -y install git
 yum -y install java-1.8.0-openjdk-devel
 cd /vagrant && ./pam-setup.sh -n localhost:8080 -b both
 chown -R vagrant:vagrant /vagrant
-sh /vagrant/go_pam.sh &
+sh /vagrant/go_pam.sh
