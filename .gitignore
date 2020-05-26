@@ -223,4 +223,9 @@ buildNumber.properties
 # Ignore all local history of files
 .history
 
+.vagrant
+jboss-eap-7.2.0.zip
+jboss-eap-7.2.8-patch.zip
+rhpam-7.7.0-business-central-eap7-deployable.zip
+rhpam-7.7.0-kie-server-ee8.zip
 # End of https://www.gitignore.io/api/git,java,maven,eclipse,intellij,visualstudiocode
