@@ -6,21 +6,7 @@ Vagrant.configure("2") do |config|
 config.ssh.insert_key = false
 config.vm.box = "centos/7"
 
-# RHPAM 7.7.
-  config.vm.define "rhpam77" do |rhpam77|
-      rhpam77.vm.hostname = "rhpam77"
-      rhpam77.vm.network "forwarded_port", guest: 8080, host: 8080
-      rhpam77.vm.network "public_network",bridge: "eth0", ip: "192.168.1.177"
-      rhpam77.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["ro"]
-      rhpam77.vm.provision "shell", path: "rhpam_bootstrap.sh"
-      rhpam77.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus","4"]
-        vb.customize ["modifyvm", :id, "--groups", "/RHPAM"]
-        vb.name = "rhpam77"
-      end
-  end
-
-# MYSQL 8
+# MYSQL 57
   config.vm.define "mysql57" do |mysql57|
       mysql57.vm.hostname = "mysql57"
       mysql57.vm.network "forwarded_port", guest: 3306, host: 3306
@@ -35,5 +21,18 @@ config.vm.box = "centos/7"
       end
   end
 
+# RHPAM 7.7.
+  config.vm.define "rhpam77" do |rhpam77|
+      rhpam77.vm.hostname = "rhpam77"
+      rhpam77.vm.network "forwarded_port", guest: 8080, host: 8080
+      rhpam77.vm.network "public_network",bridge: "eth0", ip: "192.168.1.177"
+      rhpam77.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["ro"]
+      rhpam77.vm.provision "shell", path: "rhpam_bootstrap.sh"
+      rhpam77.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus","4"]
+        vb.customize ["modifyvm", :id, "--groups", "/RHPAM"]
+        vb.name = "rhpam77"
+      end
+  end
 
 end

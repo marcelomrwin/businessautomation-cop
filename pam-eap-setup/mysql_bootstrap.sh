@@ -1,11 +1,14 @@
 #!/bin/bash
-yum --enablerepo=centos-sclo-rh -y install rh-mysql57-mysql-server
-scl enable rh-mysql57 bash
-mysql -V
-which mysql
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+yum update -y
 
-echo "source /opt/rh/rh-mysql57/enable" >> /etc/profile.d/rh-mysql57.sh
-echo "export X_SCLS=\"`scl enable rh-mysql57 'echo $X_SCLS'`\"" >> /etc/profile.d/rh-mysql57.sh
+yum install mysql-server
+systemctl start mysqld
+
+mysql CREATE USER 'pamAdmin'@'%' IDENTIFIED BY 'S3cr3tK3y#';
+mysql GRANT ALL ON *.* TO 'pamAdmin'@'%' IDENTIFIED BY 'S3cr3tK3y#';
+mysql CREATE DATABASE COMGAS;
 
 yum --enablerepo=epel -y install phpMyAdmin php-mysql php-mcrypt
 systemctl restart httpd
