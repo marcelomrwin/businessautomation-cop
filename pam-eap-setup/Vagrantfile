@@ -12,7 +12,6 @@ config.vm.box = "centos/7"
       mysql57.vm.network "forwarded_port", guest: 3306, host: 3306
       mysql57.vm.network "forwarded_port", guest: 8306, host: 80
       mysql57.vm.network "public_network",bridge: "eth0", ip: "192.168.1.178"
-      mysql57.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["ro"]
       mysql57.vm.provision "shell", path: "mysql_bootstrap.sh"
       mysql57.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus","2"]
