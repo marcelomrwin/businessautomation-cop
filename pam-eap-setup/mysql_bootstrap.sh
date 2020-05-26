@@ -1,5 +1,5 @@
 #!/bin/bash
-yum -y instal wget
+yum -y install wget
 wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
 sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
 yum update -y
