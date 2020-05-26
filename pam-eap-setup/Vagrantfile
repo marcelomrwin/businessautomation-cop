@@ -11,25 +11,29 @@ config.vm.box = "centos/7"
       rhpam77.vm.hostname = "rhpam77"
       rhpam77.vm.network "forwarded_port", guest: 8080, host: 8080
       rhpam77.vm.network "public_network",bridge: "eth0", ip: "192.168.1.177"
+      rhpam77.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["ro"]
+      rhpam77.vm.provision "shell", path: "rhpam_bootstrap.sh"
       rhpam77.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus","4"]
         vb.customize ["modifyvm", :id, "--groups", "/RHPAM"]
         vb.name = "rhpam77"
       end
   end
-  config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["ro"]
 
-  config.vm.provision "shell", inline: <<-SHELL
+# MYSQL 8
+  config.vm.define "mysql57" do |mysql57|
+      mysql57.vm.hostname = "mysql57"
+      mysql57.vm.network "forwarded_port", guest: 3306, host: 3306
+      mysql57.vm.network "forwarded_port", guest: 8306, host: 80
+      mysql57.vm.network "public_network",bridge: "eth0", ip: "192.168.1.178"
+      mysql57.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["ro"]
+      mysql57.vm.provision "shell", path: "mysql_bootstrap.sh"
+      mysql57.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus","2"]
+        vb.customize ["modifyvm", :id, "--groups", "/RHPAM"]
+        vb.name = "mysql57"
+      end
+  end
 
-      yum -y update
-      yum -y install unzip
-      yum -y install maven
-      yum -y install git
-      yum -y install java-1.8.0-openjdk-devel
-      cd /vagrant && ./pam-setup.sh -n localhost:8080 -b both
-      chown -R vagrant:vagrant /vagrant
-      sh /vagrant/go_pam.sh
-
-    SHELL
 
 end
