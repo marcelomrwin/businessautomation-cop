@@ -10,7 +10,7 @@ config.vm.box = "centos/7"
   config.vm.define "mysql57" do |mysql57|
       mysql57.vm.hostname = "mysql57"
       mysql57.vm.network "forwarded_port", guest: 3306, host: 3306
-      mysql57.vm.network "forwarded_port", guest: 8306, host: 80
+      mysql57.vm.network "forwarded_port", guest: 80, host: 8306
       mysql57.vm.network "public_network",bridge: "eth0", ip: "192.168.1.178"
       mysql57.vm.provision "shell", path: "mysql_bootstrap.sh"
       mysql57.vm.provider :virtualbox do |vb|
