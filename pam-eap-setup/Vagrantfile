@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+#config.vm.network "public_network", auto_config: false
+config.ssh.insert_key = false
+config.vm.box = "centos/7"
+
+# RHPAM 7.7.
+  config.vm.define "rhpam77" do |rhpam77|
+      rhpam77.vm.hostname = "rhpam77"
+      rhpam77.vm.network "forwarded_port", guest: 8080, host: 8080
+      rhpam77.vm.network "public_network",bridge: "eth0", ip: "192.168.1.177"
+      rhpam77.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus","4"]
+        vb.customize ["modifyvm", :id, "--groups", "/RHPAM"]
+        vb.name = "rhpam77"
+      end
+  end
+  config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["ro"]
+
+  config.vm.provision "shell", inline: <<-SHELL
+
+      yum -y update
+      yum install java-1.8.0-openjdk-devel
+
+    SHELL
+
+end
