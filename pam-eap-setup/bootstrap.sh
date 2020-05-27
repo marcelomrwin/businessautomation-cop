@@ -15,9 +15,9 @@ yum update -y
 yum -y install mysql-server
 systemctl start mysqld
 
-#mysql CREATE USER 'pamAdmin'@'%' IDENTIFIED BY 'S3cr3tK3y#';
-#mysql GRANT ALL ON *.* TO 'pamAdmin'@'%' IDENTIFIED BY 'S3cr3tK3y#';
-#mysql CREATE DATABASE COMGAS;
+#CREATE USER 'pamAdmin'@'%' IDENTIFIED BY 'S3cr3tK3y#';
+#GRANT ALL ON *.* TO 'pamAdmin'@'%' IDENTIFIED BY 'S3cr3tK3y#';
+#CREATE DATABASE COMGAS;
 
 yum -y install httpd
 yum -y install phpmyadmin
